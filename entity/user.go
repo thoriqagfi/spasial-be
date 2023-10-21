@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"gin-gorm-clean-template/helpers"
+	"spasial-be/helpers"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -14,7 +14,7 @@ type User struct {
 	NoTelp 		string 		`json:"no_telp"`
 	Password 	string  	`json:"password"`
 	Role		string		`json:"role"`
-	
+
 	Timestamp
 }
 

@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"gin-gorm-clean-template/common"
-	"gin-gorm-clean-template/service"
 	"net/http"
+	"spasial-be/common"
+	"spasial-be/service"
 	"strings"
 
 	"github.com/gin-gonic/gin"

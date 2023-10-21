@@ -1,11 +1,11 @@
 package controller
 
 import (
-	"gin-gorm-clean-template/common"
-	"gin-gorm-clean-template/dto"
-	"gin-gorm-clean-template/entity"
-	"gin-gorm-clean-template/service"
 	"net/http"
+	"spasial-be/common"
+	"spasial-be/dto"
+	"spasial-be/entity"
+	"spasial-be/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -72,7 +72,7 @@ func(uc *userController) LoginUser(ctx *gin.Context) {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, response)
 		return
 	}
-	
+
 	user, err := uc.userService.FindUserByEmail(ctx.Request.Context(), userLoginDTO.Email)
 	if err != nil {
 		response := common.BuildErrorResponse("Gagal Login", err.Error(), common.EmptyObj{})
@@ -84,7 +84,7 @@ func(uc *userController) LoginUser(ctx *gin.Context) {
 		Token: token,
 		Role: user.Role,
 	}
-	
+
 	response := common.BuildResponse(true, "Berhasil Login", userResponse)
 	ctx.JSON(http.StatusOK, response)
 }
@@ -117,7 +117,7 @@ func(uc *userController) UpdateUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, res)
 		return
 	}
-	
+
 	token := ctx.MustGet("token").(string)
 	userID, err := uc.jwtService.GetUserIDByToken(token)
 	if err != nil {

@@ -1,0 +1,59 @@
+version: '3'
+services:
+  app:
+    container_name: spasial-be #full_app
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - DB_HOST=localhost
+      - DB_USER=root
+      - DB_PASS=
+      - DB_PORT=3306
+    restart: on-failure
+    volumes:
+      - api:/usr/src/app/
+    depends_on:
+      - spasial-mysql #fullstack-mysql
+    networks:
+      - backend #fullstack
+
+
+  spasial-postgres: #fullstack-mysql:
+    image: postgres:alpine
+    container_name: db-postgres #full_db_mysql
+    ports:
+      - 5432:5432
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=spasial
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=spasial-2024
+    volumes:
+      - database_postgres:/var/lib/postgresql/data
+    networks:
+      - backend #fullstack
+
+  pgadmin:
+    image: dpage/pgadmin14
+    container_name: pgadmin_container
+    depends_on:
+      - spasial-postgres #fullstack-mysql
+    environment:
+      PGADMIN_DEFAULT_EMAIL: thoriqagfi@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: thoriqagfi
+    ports:
+      - 5050:80
+    restart: unless-stopped
+    networks:
+      - backend #fullstack
+
+
+volumes:
+  api:
+  database_postgres:
+
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
+    driver: bridge

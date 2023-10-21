@@ -1,8 +1,8 @@
 package common
 
 import (
-	"gin-gorm-clean-template/entity"
 	"math"
+	"spasial-be/entity"
 
 	"gorm.io/gorm"
 )

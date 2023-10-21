@@ -2,8 +2,8 @@ package config
 
 import (
 	"fmt"
-	"gin-gorm-clean-template/entity"
 	"os"
+	"spasial-be/entity"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

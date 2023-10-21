@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"gin-gorm-clean-template/entity"
+	"spasial-be/entity"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"

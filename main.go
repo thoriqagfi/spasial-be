@@ -1,14 +1,14 @@
 package main
 
 import (
-	"gin-gorm-clean-template/common"
-	"gin-gorm-clean-template/config"
-	"gin-gorm-clean-template/controller"
-	"gin-gorm-clean-template/repository"
-	"gin-gorm-clean-template/routes"
-	"gin-gorm-clean-template/service"
 	"net/http"
 	"os"
+	"spasial-be/common"
+	"spasial-be/config"
+	"spasial-be/controller"
+	"spasial-be/repository"
+	"spasial-be/routes"
+	"spasial-be/service"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -25,7 +25,7 @@ func main() {
 
 	var (
 		db *gorm.DB = config.SetupDatabaseConnection()
-		
+
 		jwtService service.JWTService = service.NewJWTService()
 
 		userRepository repository.UserRepository = repository.NewUserRepository(db)

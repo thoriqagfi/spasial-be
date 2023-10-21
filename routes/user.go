@@ -1,9 +1,9 @@
 package routes
 
 import (
-	"gin-gorm-clean-template/controller"
-	"gin-gorm-clean-template/middleware"
-	"gin-gorm-clean-template/service"
+	"spasial-be/controller"
+	"spasial-be/middleware"
+	"spasial-be/service"
 
 	"github.com/gin-gonic/gin"
 )
