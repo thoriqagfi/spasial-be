@@ -4,17 +4,18 @@ services:
     container_name: spasial-be #full_app
     build: .
     ports:
-      - 8080:8080
+      - 8000:8080
     environment:
-      - DB_HOST=localhost
-      - DB_USER=root
-      - DB_PASS=
-      - DB_PORT=3306
+      - DB_HOST=spasial-postgres
+      - DB_USER=postgres
+      - DB_PASS=123456789
+      - DB_PORT=5432
+      - DB_NAME=spasial-2024
     restart: on-failure
     volumes:
       - api:/usr/src/app/
     depends_on:
-      - spasial-mysql #fullstack-mysql
+      - spasial-postgres #fullstack-mysql
     networks:
       - backend #fullstack
 
@@ -23,11 +24,11 @@ services:
     image: postgres:alpine
     container_name: db-postgres #full_db_mysql
     ports:
-      - 5432:5432
+      - '5432:5432'
     environment:
-      - DATABASE_HOST=127.0.0.1
-      - POSTGRES_USER=spasial
-      - POSTGRES_PASSWORD=secret
+      - DATABASE_HOST=localhost
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456789
       - POSTGRES_DB=spasial-2024
     volumes:
       - database_postgres:/var/lib/postgresql/data
@@ -35,7 +36,7 @@ services:
       - backend #fullstack
 
   pgadmin:
-    image: dpage/pgadmin14
+    image: dpage/pgadmin4
     container_name: pgadmin_container
     depends_on:
       - spasial-postgres #fullstack-mysql
@@ -43,7 +44,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: thoriqagfi@gmail.com
       PGADMIN_DEFAULT_PASSWORD: thoriqagfi
     ports:
-      - 5050:80
+      - "5050:80"
     restart: unless-stopped
     networks:
       - backend #fullstack
